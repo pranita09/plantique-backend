@@ -8,6 +8,8 @@ const app = express();
 const cors = require("cors");
 const helmet = require("helmet");
 
+const authRouter = require("./routes/auth.router");
+
 const errorHandler = require("./middlewares/errorHandler.middleware");
 const routeNotFound = require("./middlewares/routeNotFound.middleware");
 
@@ -19,6 +21,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello, Welcome to Plantique!");
 });
+
+app.use("/auth", authRouter);
 
 app.use(errorHandler);
 app.use(routeNotFound);
