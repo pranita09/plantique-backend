@@ -19,4 +19,28 @@ async function seedCategoriesDatabase() {
   }
 }
 
-module.exports = { seedCategoriesDatabase };
+// get all categories
+async function readAllCategories() {
+  try {
+    const categories = await Category.find({});
+    return categories;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// get category by id
+async function readCategoryById(categoryId) {
+  try {
+    const category = await Category.findById(categoryId);
+    return category;
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = {
+  seedCategoriesDatabase,
+  readAllCategories,
+  readCategoryById,
+};
