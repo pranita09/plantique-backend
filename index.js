@@ -2,12 +2,27 @@ const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
 require("./db/db.connect");
 
-const {
-  seedCategoriesDatabase,
-} = require("./controllers/categories.controller");
-const { seedProductsDatabase } = require("./controllers/products.controller");
-const { seedUsersDatabase } = require("./controllers/users.controller");
+const express = require("express");
+const app = express();
 
-// seedCategoriesDatabase();
-// seedProductsDatabase();
-// seedUsersDatabase();
+const cors = require("cors");
+const helmet = require("helmet");
+
+const errorHandler = require("./middlewares/errorHandler.middleware");
+const routeNotFound = require("./middlewares/routeNotFound.middleware");
+
+app.use(cors());
+app.use(helmet());
+
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello, Welcome to Plantique!");
+});
+
+app.use(errorHandler);
+app.use(routeNotFound);
+
+app.listen(process.env.PORT, () => {
+  console.log("Server started at port", process.env.PORT);
+});
