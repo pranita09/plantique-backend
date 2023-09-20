@@ -43,4 +43,24 @@ async function seedProductsDatabase() {
   }
 }
 
-module.exports = { seedProductsDatabase };
+// get all products
+async function readAllProducts() {
+  try {
+    const products = await Product.find({});
+    return products;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// get a product by id
+async function readProductById(productId) {
+  try {
+    const product = await Product.findById(productId);
+    return product;
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = { seedProductsDatabase, readAllProducts, readProductById };

@@ -10,6 +10,7 @@ const helmet = require("helmet");
 
 const authRouter = require("./routes/auth.router");
 const categoryRouter = require("./routes/categories.router");
+const productRouter = require("./routes/products.router");
 
 const errorHandler = require("./middlewares/errorHandler.middleware");
 const routeNotFound = require("./middlewares/routeNotFound.middleware");
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 
 app.use("/auth", authRouter);
 app.use("/categories", categoryRouter);
+app.use("/products", productRouter);
 
 app.use(errorHandler);
 app.use(routeNotFound);
