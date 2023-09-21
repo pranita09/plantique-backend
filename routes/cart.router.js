@@ -54,7 +54,7 @@ cartRouter.delete("/:productId", async (req, res) => {
       });
     } else {
       const cart = await removeItemFromCart(userId, productId);
-      res.status(201).json({ cart, message: "Item removed from the cart." });
+      res.status(200).json({ cart, message: "Item removed from the cart." });
     }
   } catch (error) {
     res.status(500).json({ error: "Failed to remove item from the cart." });
@@ -74,7 +74,7 @@ cartRouter.post("/:productId", async (req, res) => {
     } else {
       const cart = await updateQuantityOfCartItem(userId, productId, action);
       res
-        .status(201)
+        .status(200)
         .json({ cart, message: "Quantity of an item updated in the cart." });
     }
   } catch (error) {

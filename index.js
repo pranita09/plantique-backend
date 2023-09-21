@@ -12,6 +12,7 @@ const authRouter = require("./routes/auth.router");
 const categoryRouter = require("./routes/categories.router");
 const productRouter = require("./routes/products.router");
 const cartRouter = require("./routes/cart.router");
+const wishlistRouter = require("./routes/wishlist.router");
 
 const authVerify = require("./middlewares/authVerify.middleware");
 const errorHandler = require("./middlewares/errorHandler.middleware");
@@ -30,6 +31,7 @@ app.use("/auth", authRouter);
 app.use("/categories", categoryRouter);
 app.use("/products", productRouter);
 app.use("/user/cart", authVerify, cartRouter);
+app.use("/user/wishlist", authVerify, wishlistRouter);
 
 app.use(errorHandler);
 app.use(routeNotFound);
