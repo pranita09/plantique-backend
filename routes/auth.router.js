@@ -5,6 +5,9 @@ const User = require("../models/users.model");
 const { generateToken } = require("../utils/utils");
 const { signup, login } = require("../controllers/users.controller");
 
+// All the routes related to Auth are present here.
+// These are publicaly accessible routes.
+
 // signup
 authRouter.post("/signup", async (req, res) => {
   try {
@@ -31,11 +34,9 @@ authRouter.post("/login", async (req, res) => {
     const { email, password } = req.body;
     const foundUser = await login(email, password);
     if (!foundUser) {
-      res
-        .status(404)
-        .json({
-          error: "The email you entered is not registered. Not found error.",
-        });
+      res.status(404).json({
+        error: "The email you entered is not registered. Not found error.",
+      });
     }
     const encodedToken = generateToken(foundUser._id);
     res.json({ foundUser, encodedToken, message: "User login successful." });

@@ -1,12 +1,15 @@
 const express = require("express");
 const cartRouter = express.Router();
-
 const {
   readCartItems,
   addItemToCart,
   removeItemFromCart,
   updateQuantityOfCartItem,
 } = require("../controllers/cart.controller");
+
+// All the routes related to Cart are present here.
+// These are private routes.
+// Client needs to add "authorization" header with JWT token in itto access it.
 
 // get cart items
 cartRouter.get("/", async (req, res) => {

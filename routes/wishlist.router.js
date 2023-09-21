@@ -1,11 +1,14 @@
 const express = require("express");
 const wishlistRouter = express.Router();
-
 const {
   readWishlistItems,
   addItemToWishlist,
   removeItemFromWishlist,
 } = require("../controllers/wishlist.controller");
+
+// All the routes related to Wishlist are present here.
+// These are private routes.
+// Client needs to add "authorization" header with JWT token in itto access it.
 
 // get wishlist items
 wishlistRouter.get("/", async (req, res) => {

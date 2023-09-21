@@ -1,10 +1,12 @@
 const express = require("express");
 const productRouter = express.Router();
-
 const {
   readAllProducts,
   readProductById,
 } = require("../controllers/products.controller");
+
+// All the routes related to Product are present here.
+// These are publicaly accessible routes.
 
 // get all products
 productRouter.get("/", async (req, res) => {

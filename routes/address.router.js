@@ -1,12 +1,15 @@
 const express = require("express");
 const addressRouter = express.Router();
-
 const {
   readAllAddresses,
   addNewAddress,
   updateAddress,
   deleteAddress,
 } = require("../controllers/address.controller");
+
+// All the routes related to Address are present here.
+// These are private routes.
+// Client needs to add "authorization" header with JWT token in itto access it.
 
 // read all addresses of an user
 addressRouter.get("/", async (req, res) => {
