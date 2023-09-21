@@ -8,16 +8,20 @@ const app = express();
 const cors = require("cors");
 const helmet = require("helmet");
 
-const authRouter = require("./routes/auth.router");
-const categoryRouter = require("./routes/categories.router");
-const productRouter = require("./routes/products.router");
-const cartRouter = require("./routes/cart.router");
-const wishlistRouter = require("./routes/wishlist.router");
-const addressRouter = require("./routes/address.router");
+const {
+  authRouter,
+  categoryRouter,
+  productRouter,
+  cartRouter,
+  wishlistRouter,
+  addressRouter,
+} = require("./routes/index");
 
-const authVerify = require("./middlewares/authVerify.middleware");
-const errorHandler = require("./middlewares/errorHandler.middleware");
-const routeNotFound = require("./middlewares/routeNotFound.middleware");
+const {
+  authVerify,
+  errorHandler,
+  routeNotFound,
+} = require("./middlewares/index");
 
 app.use(cors());
 app.use(helmet());
