@@ -31,3 +31,5 @@ const authVerify = (req, res, next) => {
       .json({ error: "Unauthorized access. Please add valid token." });
   }
 };
+
+module.exports = authVerify;
