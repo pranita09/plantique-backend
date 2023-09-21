@@ -14,7 +14,7 @@ async function readCartItems(userId) {
 async function addItemToCart(userId, product) {
   try {
     const user = await User.findById(userId);
-    user.cart.push({ ...product, qty: 1 });
+    user.cart = [{ ...product, qty: 1 }, ...user.cart];
     const updatedUser = await user.save();
     return updatedUser.cart;
   } catch (error) {

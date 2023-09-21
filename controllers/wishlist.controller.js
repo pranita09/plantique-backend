@@ -14,7 +14,7 @@ async function readWishlistItems(userId) {
 async function addItemToWishlist(userId, product) {
   try {
     const user = await User.findById(userId);
-    user.wishlist.push(product);
+    user.wishlist = [product, ...user.wishlist];
     const updatedUser = await user.save();
     return updatedUser.wishlist;
   } catch (error) {
