@@ -34,13 +34,14 @@ async function seedUsersDatabase() {
 // signup
 async function signup(userDetails) {
   try {
-    const user = new User(userDetails);
+    const user = new User({ ...userDetails });
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(user.password, salt);
     user.password = hashedPassword;
-    await user.save();
-    return user;
+    const createdUser = await user.save();
+    return createdUser;
   } catch (error) {
+    console.error("Error saving user:", error);
     throw error;
   }
 }

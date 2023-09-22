@@ -33,7 +33,7 @@ addressRouter.get("/", async (req, res) => {
 // add new address to the user
 addressRouter.post("/", async (req, res) => {
   try {
-    const address = req.body;
+    const { address } = req.body;
     const userId = req.user.userId;
     if (!userId) {
       res.status(404).json({
@@ -55,7 +55,7 @@ addressRouter.post("/", async (req, res) => {
 addressRouter.post("/:addressId", async (req, res) => {
   try {
     const addressId = req.params.addressId;
-    const address = req.body;
+    const { address } = req.body;
     const userId = req.user.userId;
     if (!userId) {
       res.status(404).json({

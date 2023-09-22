@@ -30,7 +30,7 @@ wishlistRouter.get("/", async (req, res) => {
 // add item to wishlist
 wishlistRouter.post("/", async (req, res) => {
   try {
-    const product = req.body;
+    const { product } = req.body;
     const userId = req.user.userId;
     if (!userId) {
       res.status(404).json({

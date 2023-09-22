@@ -14,10 +14,17 @@ async function readCartItems(userId) {
 async function addItemToCart(userId, product) {
   try {
     const user = await User.findById(userId);
-    user.cart = [{ ...product, qty: 1 }, ...user.cart];
-    const updatedUser = await user.save();
+    const updatedCart = [{ ...product, qty: 1 }, ...user.cart];
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $set: { cart: updatedCart },
+      },
+      { new: true }
+    );
     return updatedUser.cart;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 }
@@ -26,7 +33,9 @@ async function addItemToCart(userId, product) {
 async function removeItemFromCart(userId, productId) {
   try {
     const user = await User.findById(userId);
-    const userCart = user.cart.filter(({ _id }) => _id !== productId);
+    const userCart = user.cart.filter(
+      ({ _id }) => _id.toString() !== productId
+    );
     user.cart = userCart;
     const updatedUser = await user.save();
     return updatedUser.cart;
@@ -40,14 +49,14 @@ async function updateQuantityOfCartItem(userId, productId, action) {
   try {
     const user = await User.findById(userId);
     const userCart = user.cart.map((product) => {
-      if (product._id === productId) {
+      if (product._id.toString() === productId) {
         switch (action.type) {
           case "increment":
             return { ...product, qty: product.qty + 1 };
           case "decrement":
             return { ...product, qty: product.qty - 1 };
           default:
-            return product;
+            throw new Error("Invalid action type.");
         }
       } else {
         return product;

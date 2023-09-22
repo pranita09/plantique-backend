@@ -31,7 +31,7 @@ cartRouter.get("/", async (req, res) => {
 // add item to cart
 cartRouter.post("/", async (req, res) => {
   try {
-    const product = req.body;
+    const { product } = req.body;
     const userId = req.user.userId;
     if (!userId) {
       res.status(404).json({
@@ -68,7 +68,7 @@ cartRouter.delete("/:productId", async (req, res) => {
 cartRouter.post("/:productId", async (req, res) => {
   try {
     const productId = req.params.productId;
-    const action = req.body;
+    const { action } = req.body;
     const userId = req.user.userId;
     if (!userId) {
       res.status(404).json({

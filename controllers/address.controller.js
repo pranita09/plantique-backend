@@ -14,7 +14,7 @@ async function readAllAddresses(userId) {
 async function addNewAddress(userId, newAddress) {
   try {
     const user = await User.findById(userId);
-    user.address.push(newAddress);
+    user.address = [newAddress, ...user.address];
     const updatedUser = await user.save();
     return updatedUser.address;
   } catch (error) {
